@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #ffebee; /* Light pink background */
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #e91e63; /* Pink color */
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #yesButton {
+      background-color: #e91e63; /* Pink color */
+      color: white;
+    }
+
+    #noButton {
+      background-color: #ccc; /* Gray color */
+      color: #666;
+      cursor: not-allowed; /* Disable clicking */
+    }
+
+    #yesButton:hover {
+      transform: scale(1.1); /* Slight zoom effect on hover */
+    }
+
+    /* Balloon and love pop-out styles */
+    .celebration {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .balloon, .love {
+      position: absolute;
+      font-size: 2rem;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    .balloon {
+      color: #e91e63; /* Pink color */
+    }
+
+    .love {
+      color: #ff4081; /* Red color */
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(-50%);
+      }
+      100% {
+        transform: translateY(-100vh) translateX(50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will You Be My Valentine?</h1>
+    <div class="buttons">
+      <button id="yesButton">Yes</button>
+      <button id="noButton" disabled>No</button>
+    </div>
+  </div>
+
+  <!-- Celebration area for balloons and love emojis -->
+  <div class="celebration" id="celebration"></div>
+
+  <script>
+    // Function to create balloons and love emojis
+    function createCelebration() {
+      const celebration = document.getElementById('celebration');
+      const emojis = ['🎈', '❤️', '💖', '💕', '🎉']; // Balloons and love emojis
+
+      for (let i = 0; i < 50; i++) {
+        const emoji = document.createElement('div');
+        emoji.classList.add(Math.random() > 0.5 ? 'balloon' : 'love');
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = ${Math.random() * 100}vw;
+        emoji.style.animationDuration = ${Math.random() * 3 + 2}s;
+        celebration.appendChild(emoji);
+
+        // Remove emoji after animation ends
+        emoji.addEventListener('animationend', () => {
+          emoji.remove();
+        });
+      }
+    }
+
+    // Add celebration when "Yes" button is clicked
+    document.getElementById('yesButton').addEventListener('click', () => {
+      alert('Yay! You made me the happiest person! 💖');
+      createCelebration();
+      setInterval(createCelebration, 2000); // Keep the celebration going
+    });
+  </script>
+</body>
+</html>
